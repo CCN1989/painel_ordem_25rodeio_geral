@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordem de Apresentação</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: #ff8c00;
+    color: #000;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#header {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    align-items: center;
+    padding: 8px;
+    background: #ff8c00;
+    border-bottom: 2px solid #c2410c;
+}
+
+#container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 8px;
+    min-height: 0;
+}
+
+.quadro {
+    background: #fff3e0;
+    border: 2px solid #c2410c;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.titulo-quadro {
+    background: #c2410c;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 6px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Alterado de fixed para auto para permitir ajuste automático das colunas */
+    table-layout: auto; 
+    flex: 1;
+}
+
+th {
+    background: #ffb347;
+    font-size: 11px;
+    padding: 6px 4px;
+    border-bottom: 2px solid #c2410c;
+    text-align: center;
+    white-space: nowrap; /* Evita que o título da coluna quebre linha */
+}
+
+/* Ajuste das colunas Cat. e RT */
+th.col-auto, td.col-auto {
+    width: 1%; /* Força a coluna a ocupar o mínimo espaço possível (conteúdo) */
+    white-space: nowrap;
+    padding: 0 8px;
+}
+
+td {
+    padding: 2px 4px;
+    font-size: 11px;
+    text-align: center; 
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    /* Permitimos quebra de linha apenas se necessário, mas mantemos o ellipsis para segurança */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(odd) { background: #ffffff; }
+tbody tr:nth-child(even) { background: #ffd8a8; }
+
+.status-box {
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 4px;
+    font-size: 10px;
+    display: inline-block;
+    width: 90px; /* Largura fixa para os botões de status ficarem alinhados */
+    margin: 0 auto;
+}
+
+.npresente { background: #dc2626 !important; color: #fff !important; }
+.aguardando { background: #facc15 !important; color: #000 !important; }
+.concluido { background: #16a34a !important; color: #fff !important; }
+
+/* ... (Estilos do Rodapé mantidos iguais) ... */
+#footer { background: #ffffff; color: #000; height: 45px; font-size: 20px; font-weight: bold; display: flex; align-items: center; overflow: hidden; border-top: 3px solid #1a1a1a; flex-shrink: 0; }
+#relogio { padding: 0 15px; background: #1a1a1a; color: #ffffff; border-right: 4px solid #ff8c00; height: 100%; display: flex; align-items: center; justify-content: center; min-width: 130px; z-index: 10; font-family: 'Courier New', Courier, monospace; }
+.marquee-container { flex: 1; overflow: hidden; white-space: nowrap; }
+.marquee { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+@keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+#logo-prefeitura-area { background: white; text-align: center; padding: 5px 0; flex-shrink: 0; }
+.legenda-container { grid-column: 1 / -1; display: flex; justify-content: center; gap: 15px; margin-top: 5px; padding-top: 5px; border-top: 1px solid rgba(194, 65, 12, 0.3); }
+.legenda-item { display: flex; align-items: center; font-size: 10px; font-weight: bold; text-transform: uppercase; color: #1a1a1a; }
+.ponto-legenda { width: 12px; height: 12px; border-radius: 50%; margin-right: 5px; border: 1px solid rgba(0,0,0,0.2); }
+.txt-laranja { color: #c2410c; }
+.txt-azul { color: #2563eb; }
+</style>
+</head>
+
+<body>
+
+<div id="header">
+    <img src="Logo1.png" width="70">
+    <div style="text-align:center">
+        <div style="font-size:20px; font-weight:bold;">25º Rodeio Nativista de Esteio - CTG Chama Nativa</div>
+        <div class="legenda-container">
+            <div class="legenda-item"><div class="ponto-legenda npresente"></div> Não presente</div>
+            <div class="legenda-item"><div class="ponto-legenda aguardando"></div> Check-in realizado</div>
+            <div class="legenda-item"><div class="ponto-legenda concluido"></div> Concluído (boa sorte)</div>
+        </div>
+    </div>
+    <img src="Logo2.png" width="70">
+</div>
+
+<div id="container">
+    <div class="quadro">
+        <div class="titulo-quadro">Danças Tradicionais (GRUPO) | PALCO A</div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-auto">Ordem</th>
+                    <th class="col-auto">Cat.</th>
+                    <th>Entidade</th>
+                    <th class="col-auto">RT</th>
+                    <th width="100px">Status</th>
+                </tr>
+            </thead>
+            <tbody id="dados1"></tbody>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <div class="titulo-quadro">Danças Tradicionais (PAR) | PALCO B</div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-auto">Ordem</th>
+                    <th class="col-auto">Cat.</th>
+                    <th>Concorrente / Entidade</th>
+                    <th class="col-auto">RT</th>
+                    <th width="100px">Status</th>
+                </tr>
+            </thead>
+            <tbody id="dados2"></tbody>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <div class="titulo-quadro">Danças de Salão | PALCO C</div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-auto">Ordem</th>
+                    <th class="col-auto">Cat.</th>
+                    <th>Concorrente / Entidade</th>
+                    <th class="col-auto">RT</th>
+                    <th width="100px">Status</th>
+                </tr>
+            </thead>
+            <tbody id="dados3"></tbody>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <div class="titulo-quadro">Declamação | PALCO D</div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-auto">Ordem</th>
+                    <th class="col-auto">Cat.</th>
+                    <th>Concorrente / Entidade</th>
+                    <th class="col-auto">RT</th>
+                    <th width="100px">Status</th>
+                </tr>
+            </thead>
+            <tbody id="dados4"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="logo-prefeitura-area">
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/logo%20prefeitura.png" height="35">
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/logo%20oficial.png" height="35">
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/lider.png" height="35">
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/take.png" height="35">
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/fenix.png" height="35">
+</div>
+
+<div id="footer">
+    <div id="relogio">00:00:00</div>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span class="txt-laranja">| Boa Sorte! visite www.ctgchamanativa.com.br |</span>
+            <span class="separador">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="txt-azul">| Produzido por www.nossoeventors.com.br |</span>
+        </div>
+    </div>
+</div>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbySeJkdCX2zB6TqkDCYgljKTqW3AA6aC9AziFQjgdwEbUGuNNP1pFNTmBX8IqaB9MmZLg/exec";
+
+const MAPA_PALCOS = {
+    "1": "Danças Tradicionais",
+    "2": "Dança PAR",
+    "3": "Dança de Salão",
+    "4": "Declamação"
+};
+
+// --- CONFIGURAÇÃO INDIVIDUAL DE LINHAS ---
+// Altere os números abaixo para decidir quantas linhas aparecem em cada quadro
+const LINHAS_POR_PALCO = {
+    "1": 6,  // Palco A
+    "2": 6,  // Palco B
+    "3": 6,  // Palco C
+    "4": 6   // Palco D
+};
+
+let dadosGlobais = {};
+let paginas = { "Danças Tradicionais": 0, "Dança PAR": 0, "Dança de Salão": 0, "Declamação": 0 };
+
+function atualizarRelogio() {
+    const agora = new Date();
+    const h = String(agora.getHours()).padStart(2, '0');
+    const m = String(agora.getMinutes()).padStart(2, '0');
+    const s = String(agora.getSeconds()).padStart(2, '0');
+    document.getElementById("relogio").innerText = `${h}:${m}:${s}`;
+}
+
+function carregarDados() {
+    fetch(URL).then(r => r.json()).then(resp => {
+        dadosGlobais = resp;
+        atualizarTudo();
+    }).catch(e => console.error("Erro:", e));
+}
+
+function atualizarTudo() {
+    [1, 2, 3, 4].forEach(num => renderizar(num));
+}
+
+function renderizar(num) {
+    const nomeAba = MAPA_PALCOS[num];
+    const tbody = document.getElementById("dados" + num);
+    const maxLinhas = LINHAS_POR_PALCO[num]; // Pega a config individual
+    let listaOriginal = dadosGlobais[nomeAba];
+    
+    if (!listaOriginal || !tbody) return;
+
+    const lista = listaOriginal.filter(l => {
+        let status = (l["Status"] || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return !status.includes("concluido"); 
+    });
+
+    let inicio = paginas[nomeAba] * maxLinhas;
+    if (inicio >= lista.length) { inicio = 0; paginas[nomeAba] = 0; }
+
+    const itens = lista.slice(inicio, inicio + maxLinhas);
+    tbody.innerHTML = "";
+
+    if (itens.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="padding:20px; color:#c2410c; font-weight:bold;">Apresentações Encerradas</td></tr>`;
+        return;
+    }
+
+    itens.forEach(l => {
+        let status = (l["Status"] || "").trim();
+        let sNorm = status.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let classe = sNorm.includes("nao presente") ? "npresente" : "aguardando";
+
+        const tr = document.createElement("tr");
+        // Ajusta a altura da linha baseado na quantidade de linhas do palco
+        tr.style.height = `calc(100% / ${maxLinhas})`; 
+
+        if (num == 1) {
+            tr.innerHTML = `
+                <td class="col-auto">${l["Ordem"] || ""}</td>
+                <td class="col-auto">${l["Categoria"] || ""}</td>
+                <td style="font-weight:bold;">${l["Entidade"] || ""}</td>
+                <td class="col-auto">${l["Região"] || ""}</td>
+                <td><span class="status-box ${classe}">${status}</span></td>
+            `;
+        } else {
+            tr.innerHTML = `
+                <td class="col-auto">${l["Ordem"] || ""}</td>
+                <td class="col-auto">${l["Categoria"] || ""}</td>
+                <td>
+                    <div style="font-weight:bold;">${l["Concorrente"] || ""}</div>
+                    <div style="font-size:9px; opacity:0.8;">${l["Entidade"] || ""}</div>
+                </td>
+                <td class="col-auto">${l["Região"] || ""}</td>
+                <td><span class="status-box ${classe}">${status}</span></td>
+            `;
+        }
+        tbody.appendChild(tr);
+    });
+
+    paginas[nomeAba]++;
+}
+
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
+carregarDados();
+setInterval(carregarDados, 40000);
+setInterval(atualizarTudo, 9000); 
+</script>
+</body>
+</html>
